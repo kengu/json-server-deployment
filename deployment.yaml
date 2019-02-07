@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: json-server-test
+  labels:
+    app: json-server-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: json-server-test
+  template:
+    metadata:
+      labels:
+        app: json-server-test
+    spec:
+      containers:
+      - name: json-server-test
+        image: clue/json-server:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: json-server-test-volume
+          mountPath: /data
+      volumes:
+      - name: json-server-test-volume
+        configMap:
+          name: json-server-test-config

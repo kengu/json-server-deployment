@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: json-server-test-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: status.discoos.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: json-server-test
+          servicePort: 80
+      - path: /
+        backend:
+          serviceName: json-server-test
+          servicePort: 443
